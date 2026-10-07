@@ -1,0 +1,2 @@
+# Netlify SPA fallback — lets React Router handle /dashboard, /editor/:id, etc.
+/*  /index.html  200

@@ -1,0 +1,29 @@
+# Render Blueprint — CreatorForge AI full-stack (API + serves built web client).
+# Deploy: dashboard.render.com → New → Blueprint → point at your repo.
+# You get ONE permanent URL (https://creatorforge-ai.onrender.com) — open it on your phone.
+services:
+  - type: web
+    name: creatorforge-ai
+    runtime: node
+    plan: free
+    buildCommand: "cd client && npm install && npm run build && cd ../server && npm install"
+    startCommand: "cd server && node src/index.js"
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: PORT
+        value: "4000"
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIR
+        value: /var/data/creatorforge
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_EMAIL
+        value: admin@creatorforge.ai
+      - key: ADMIN_PASSWORD
+        generateValue: true
+    disk:
+      name: creatorforge-data
+      mountPath: /var/data/creatorforge
+      sizeGB: 1
